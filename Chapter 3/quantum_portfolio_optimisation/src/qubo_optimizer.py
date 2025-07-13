@@ -7,8 +7,8 @@ from qiskit_optimization import QuadraticProgram
 from qiskit_optimization.algorithms import MinimumEigenOptimizer
 from qiskit_optimization.converters import QuadraticProgramToQubo
 
-N_ASSETS = 20
-M_SELECTED = 5
+N_ASSETS = 8
+M_SELECTED = 3
 RISK_AVERSION = 0.5
 
 def read_data():
@@ -26,9 +26,9 @@ def build_qubo_problem():
     for i in range(N_ASSETS):
         qp.binary_var(name=f"x_{i}")
 
-    linear = {f"x_{i}": -mean_returns for i in range(N_ASSETS)}
+    linear = {f"x_{i}": -mean_returns[i] for i in range(N_ASSETS)}
     quadratic = {
-        (f"x_{i}", f"x_{j}"): float(RISK_AVERSION * cov_matrix)
+        (f"x_{i}", f"x_{j}"): float(RISK_AVERSION * cov_matrix[i][j])
         for i in range(N_ASSETS) for j in range(N_ASSETS)
     }
 

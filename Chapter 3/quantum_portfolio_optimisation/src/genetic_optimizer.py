@@ -2,8 +2,8 @@ import numpy as np
 import pandas as pd
 import os
 
-N_ASSETS=20
-M_SELECTED=5
+N_ASSETS=8
+M_SELECTED=3
 POPULATION_SIZE=50
 N_ITERATIONS=100
 TOP_K=10

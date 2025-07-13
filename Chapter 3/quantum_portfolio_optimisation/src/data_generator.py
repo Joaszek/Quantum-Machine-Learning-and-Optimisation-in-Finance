@@ -3,7 +3,7 @@ import pandas as pd
 import os
 
 
-def generate_data(n_assets: int = 20, seed: int = 42):
+def generate_data(n_assets: int = 8, seed: int = 42):
     data_dir = "../data"
 
     mean_returns_path = os.path.join(data_dir, "mean_returns.csv")
