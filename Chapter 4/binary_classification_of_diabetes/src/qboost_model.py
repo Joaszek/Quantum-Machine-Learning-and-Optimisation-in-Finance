@@ -46,7 +46,7 @@ class QBoostClassifier:
 
         result = solver.solve(qp)
 
-        self.selected_indices = [1.0 for i, val in enumerate(result.x) if val == 1]
+        self.selected_indices = [i for i, val in enumerate(result.x) if val == 1]
         self.alpha_weights = [1.0 if i in self.selected_indices else 0.0 for i in range(n)]
 
 
@@ -70,7 +70,3 @@ class QBoostClassifier:
         pred_matrix = np.array([clf.predict(X) for clf in self.base_classifiers])
         weighted_matrix = np.dot(self.alpha_weights, pred_matrix)
         return (weighted_matrix >= (0.5*sum(self.alpha_weights))).astype(int)
-
-    def score(self, X, y_true):
-        y_pred = self.predict(X)
-        return accuracy_score(y_true, y_pred)
